@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
 
 	public int Lives = 3; // number of lives the player hs
 
+    public int Score = 0; // score
+
 
 	Vector3 start_position; // start position of the player
 
