@@ -6,6 +6,8 @@ public class HUD : MonoBehaviour {
 	// the following variables need connected up in the editor inspector
 	public Text livesText; // text object to display the number of lives
 	public Text gameOverText; // text object to display game over message
+    public Text scoreText; // text object to display score
+    public Text levelTimeText;
 
 
 	Player playerComponent;
@@ -26,8 +28,24 @@ public class HUD : MonoBehaviour {
 		// update the display for the player's number of lives
 		livesText.text = "Lives: "+playerComponent.Lives;
 
-		// if game over, then display game over text
-		if (gameLogicComponent.gameOver == true) {
+        scoreText.text = "Score: " + gameLogicComponent.Score;
+
+        if (gameLogicComponent.LevelTime >= 100)
+        {
+            levelTimeText.text = "" + (int)gameLogicComponent.LevelTime;
+        } else if (gameLogicComponent.LevelTime >= 10)
+        {
+            levelTimeText.text = "0" + (int)gameLogicComponent.LevelTime;
+        } else if (gameLogicComponent.LevelTime >= 1)
+        {
+            levelTimeText.text = "00" + (int)gameLogicComponent.LevelTime;
+        } else
+        {
+            levelTimeText.text = "000";
+        }
+
+            // if game over, then display game over text
+            if (gameLogicComponent.gameOver == true) {
 			gameOverText.gameObject.SetActive (true);
 		}
 	}
