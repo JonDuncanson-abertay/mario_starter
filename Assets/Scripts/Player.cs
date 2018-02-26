@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
 
 	public int Lives = 3; // number of lives the player hs
 
-
+    private Rigidbody rb = null;
 	Vector3 start_position; // start position of the player
 
 
@@ -20,13 +20,34 @@ public class Player : MonoBehaviour {
 	{
 		// record the start position of the player
 		start_position = transform.position;
+        rb = GetComponent<Rigidbody>();
 	}
 
-	public void Reset()
+
+    void OnCollisionEnter(Collision collision)
+    {
+        foreach(ContactPoint contact in collision.contacts)
+        {
+
+            Debug.Log("save me");
+        }
+
+    }
+
+
+    public void Reset()
 	{
 		// reset the player position to the start position
 		transform.position = start_position;
 	}
+
+
+    void FixedUpdate()
+    {
+        rb.freezeRotation = true;
+
+
+    }
 
 	void Update()
 	{
@@ -52,5 +73,32 @@ public class Player : MonoBehaviour {
 
 		// make the call to move the character controller
 		controller.Move(moveDirection * Time.deltaTime);
-	}
+
+       
+    }
+
+
+    
+
+    //void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    SphereCollider temp = GetComponent<SphereCollider>();
+
+        
+
+    //}
+    //void OnControllerColliderHit(SphereCollider hit)
+    //{
+    //    // find out what we've hit
+
+    //    //  private GameObject sphere = getgame;
+    //    Collider sphere = GetComponent<SphereCollider>();
+
+    //    if (hit.collider.sph)
+    //    {
+    //        Debug.Log("hit head");
+
+    //    }
+
+    //}
 }
